@@ -1,0 +1,22 @@
+a = input('Please insert the interval a: ');
+b = input('Please insert the interval b: ');
+e = input('Please insert the error tolerance, e: ');
+%formulas
+fa = exp(-a)-log(a);
+fb = exp(-b)-log(b);
+if fa*fb<0
+    k = 0;
+    c = (a+b)/2;
+    fc = exp(-c) - log(c);
+    while fc > e
+        if fc < 0 
+            a = c;
+        else 
+            b = c;
+        end
+    k = k + 1;
+    end    
+    fprintf('The approximated value of x is %.f with %.f iterations made and an error tolerance of %.f',c,k,fc)
+else
+    disp('Error interval')
+end
