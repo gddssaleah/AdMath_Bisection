@@ -7,16 +7,18 @@ fb = exp(-b)-log(b);
 if fa*fb<0
     k = 0;
     c = (a+b)/2;
-    fc = exp(-c) - log(c);
-    while fc > e
+    fc = exp(-c)-log(c);
+    while abs(fc) >= e
+    fc = exp(-c)-log(c);
         if fc < 0 
-            a = c;
-        else 
             b = c;
+        else 
+            c = c;
         end
     k = k + 1;
     end    
     fprintf('The approximated value of x is %.f with %.f iterations made and an error tolerance of %.f',c,k,fc)
 else
     disp('Error interval')
+    break
 end
