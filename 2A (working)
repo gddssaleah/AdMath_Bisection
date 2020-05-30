@@ -1,0 +1,66 @@
+ab = input('Input values of range [a,b]: ');
+etol = input('Please insert the error tolerance, e: ');
+a = ab(1);
+b = ab(2);
+a2 = a;
+b2 = b;
+
+
+%BISECTION METHOD
+cnt = 1;
+fa = exp(-a)-log(a);
+fb = exp(-b)-log(b);
+
+if (fa*fb) < 0
+    c = (a + b) / 2;
+    fc = exp(-c)-log(c);
+    while abs(fc) > etol
+       if fc > 0
+            a = c;
+            c = (a + b) / 2;
+            fa = exp(-a)-log(a);
+            fb = exp(-b)-log(b);
+            fc = exp(-c)-log(c);
+            
+       else
+            b = c;
+            c = (a + b) / 2;
+            fa = exp(-a)-log(a);
+            fb = exp(-b)-log(b);
+            fc = exp(-c)-log(c);
+       end
+        cnt = cnt + 1;
+    end
+    fprintf('The root is %.5f after %.2f iterations using BISECTION METHOD \n', c, cnt)  
+else
+    disp('ERROR INTERVAL')
+end
+
+%REGULA-FALSI METHOD
+cnt2 = 1;
+fa2 = exp(-a2)-log(a2);
+fb2 = exp(-b2)-log(b2);
+
+if fa2 * fb2 < 0
+    c2 = a2 - ((fa2*(b2-a2))/(fb2-fa2));
+    fc2 = exp(-c2)-log(c2);
+    while abs(fc2) > etol
+       if fc2 > 0
+            a2 = c2;
+            fa2 = exp(-a2)-log(a2);
+            fb2 = exp(-b2)-log(b2);
+            c2 = a2 - ((fa2*(b2-a2))/(fb2-fa2));
+            fc2 = exp(-c2)-log(c2);
+       else
+            b2 = c2;
+            fa2 = exp(-a2)-log(a2);
+            fb2 = exp(-b2)-log(b2);
+            c2 = a2 - ((fa2*(b2-a2))/(fb2-fa2));
+            fc2 = exp(-c2)-log(c2);
+       end
+        cnt2 = cnt2 + 1;
+    end
+    fprintf('The root is %.5f after %.2f iterations using REGULA-FALSI METHOD \n', c2, cnt2)
+else
+    disp('ERROR INTERVAL')
+end
