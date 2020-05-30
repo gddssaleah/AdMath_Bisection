@@ -1,0 +1,31 @@
+%ORZAME_Exp2B (I changed the file name in order to be compatible with the function name)
+
+function[r,k] = polybisection(coef, ab, epsilon)
+a = ab(1); b = ab(2);
+
+k = 1;
+fa = polyval(coef,a);
+fb = polyval(coef,b);
+
+if fa * fb < 0
+    r = (a + b) / 2;
+    fc = polyval(coef,r);
+    while abs(fc) > epsilon
+       if fc < 0
+            a = r;
+            r = (a + b) / 2;
+            fa = polyval(coef,a);
+            fb = polyval(coef,b);
+            fc = polyval(coef,r);
+       else
+            b = r;
+            r = (a + b) / 2;
+            fa = polyval(coef,a);
+            fb = polyval(coef,b);
+            fc = polyval(coef,r);
+       end
+        k = k + 1;
+    end
+else
+    dip('ERROR INTERVAL \n')
+end
